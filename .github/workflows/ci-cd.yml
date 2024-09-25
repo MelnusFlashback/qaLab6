@@ -36,9 +36,14 @@ jobs:
    
       - run: npm ci 
 
-      
-      - run: npm test
-      
+      - name: Run tests with coverage
+        run: npm run test -- --coverage
+
+      - name: Upload test coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: ./coverage
      
       - run: npm run build
       
@@ -57,5 +62,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v2
 
-      - name: Test Coverage
-        uses: ArtiomTr/jest-coverage-report-action@v2
+     
